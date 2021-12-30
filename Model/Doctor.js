@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const doctorSchema = new mongoose.Schema(
   {
     name: String,
+    title: String,
     image: String,
     availiable: String,
     experience: String,
@@ -18,6 +19,7 @@ const doctorSchema = new mongoose.Schema(
 function validation(doctor) {
   const doctorValidation = Joi.object({
     name: Joi.string().required(),
+    title: Joi.string().required(),
     image: Joi.string().required(),
     availiable: Joi.string().required(),
     experience: Joi.string().required(),
