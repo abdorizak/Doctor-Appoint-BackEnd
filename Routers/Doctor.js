@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022
+ * @ author:  Abdorizak Abdalla aka (Xman)
+ */
 const { DoctorModel, validation } = require("../Model/Doctor");
 const express = require("express");
 const router = express.Router();

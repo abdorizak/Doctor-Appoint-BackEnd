@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022
+ * @ author:  Abdorizak Abdalla aka (Xman)
+ */
 const { UserModel, validate } = require("../Model/User");
 const express = require("express");
 const router = express.Router();

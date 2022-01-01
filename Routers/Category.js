@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022
+ * @ author:  Abdorizak Abdalla aka (Xman)
+ */
 const { Category, validate } = require("../Model/Cagegory");
 const { DoctorModel } = require("../Model/Doctor");
 const express = require("express");
