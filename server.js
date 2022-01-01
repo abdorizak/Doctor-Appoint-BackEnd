@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022
+ * @ author:  Abdorizak Abdalla aka (Xman)
+ */
 const connectToMongo = require("./config/db");
 const category = require("./Routers/Category");
 const doctors = require("./Routers/Doctor");
