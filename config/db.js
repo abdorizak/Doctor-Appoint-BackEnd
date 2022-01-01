@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022
+ * @ author:  Abdorizak Abdalla aka (Xman)
+ */
 const mongoose = require("mongoose");
 
 const DB = "DoctorAppointment";
