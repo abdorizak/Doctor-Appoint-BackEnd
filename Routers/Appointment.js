@@ -51,6 +51,9 @@ router.delete("/delete-Appointment/:id", async (req, res) => {
       message: "Successfully Deleted",
     });
   } catch (error) {
-    
+    res.send({
+      status: 400,
+      message: `Error : ${error}`,
+    });
   }
 });
