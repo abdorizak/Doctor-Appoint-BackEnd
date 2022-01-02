@@ -7,14 +7,16 @@ const mongoose = require("mongoose");
 
 const doctorSchema = new mongoose.Schema(
   {
+    image: String,
     name: String,
     title: String,
-    image: String,
+    price: String,
     availiable: String,
+    patients: String,
     experience: String,
-    tell: Number,
-    description: String,
     certificate: String,
+    description: String,
+    tell: Number,
     categoryId: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
   },
   { Timestamp: true }
@@ -22,14 +24,16 @@ const doctorSchema = new mongoose.Schema(
 
 function validation(doctor) {
   const doctorValidation = Joi.object({
+    image: Joi.string().required(),
     name: Joi.string().required(),
     title: Joi.string().required(),
-    image: Joi.string().required(),
+    price: Joi.string().required(),
     availiable: Joi.string().required(),
+    patients: Joi.string().required(),
     experience: Joi.string().required(),
+    certificate: Joi.string().required(),
     tell: Joi.number().min(4).required(),
     description: Joi.string().required(),
-    certificate: Joi.string().required(),
     categoryId: Joi.string().required(),
   });
 
