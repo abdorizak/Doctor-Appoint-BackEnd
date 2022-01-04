@@ -3,6 +3,7 @@
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
 const { UserModel, validate } = require("../Model/User");
+const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 
@@ -26,17 +27,18 @@ router.post("/create-User", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   try {
-    const user = new UserModel();
-    const result = await user.save();
+    const user = new UserModel(req.body);
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hashSync(user.password, salt);
+    await user.save();
     res.send({
       status: 200,
-      message: `Successfully created`,
-      User: user,
+      message: `Successfully Registered`,
     });
   } catch (error) {
     res.send({
       status: 400,
-      message: `Error: ${error}`,
+      message: ` ${error}`,
     });
   }
 });
@@ -76,3 +78,5 @@ router.delete("/delete/:id", async (req, res) => {
     });
   }
 });
+
+module.exports = router;
