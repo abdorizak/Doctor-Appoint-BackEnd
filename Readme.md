@@ -2,11 +2,16 @@
 
 this backend is used to manage the users appointments of doctors, so the user can choose a doctor to make the appointment if the doctor available, so i will use this api in mobile application.
 
-- to use this the following commands:
+## instructions
+
+before you start the server first install all packages using the this command:
 
 ```terminal
 ~ npm install
 ```
 
-create `.env` file and add SECRET KEY, Random words.
+also create `.env` file and add `SECRET_KEY`, asing the secret key to the Random words.
+
+## Credits
+
 **©** **Abdorizak Abdalla** **2022**
