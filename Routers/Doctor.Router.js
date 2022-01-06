@@ -2,11 +2,14 @@
  * Copyright (c) 2022
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
-const { DoctorModel, validation } = require("../Model/Doctor");
+const { DoctorModel, validation } = require("../Model/Doctor.Model");
 const express = require("express");
+const Auth = require("../Middleware/Auth");
 const router = express.Router();
 
-router.get("/doctors/:id", async (req, res) => {
+router.use(Auth);
+
+router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const category = await DoctorModel.find({ categoryId: id });
@@ -29,8 +32,10 @@ router.get("/doctors/:id", async (req, res) => {
   }
 });
 
-router.get("/doctors", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
+    const header = req.headers["Authorization"];
+    console.log(header);
     const allDoctors = await DoctorModel.find();
     res.send({
       status: 200,

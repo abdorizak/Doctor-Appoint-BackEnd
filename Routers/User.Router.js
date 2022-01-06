@@ -5,7 +5,10 @@
 const { UserModel, validate } = require("../Model/User");
 const bcrypt = require("bcrypt");
 const express = require("express");
+const Auth = require("../Middleware/Auth");
 const router = express.Router();
+
+// router.use(Auth)
 
 router.get("/user", async (req, res) => {
   try {
@@ -47,14 +50,23 @@ router.put("/update-user/:id", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   try {
+    const id = await UserModel.findById(req.params.id);
+    if (!id) return res.status(400).send({ message: "ID was not found" });
+    const salt = await bcrypt.genSalt(10);
+    const hashPass = await bcrypt.hashSync(req.body.password, salt);
     const updateUser = await UserModel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
+      {
+        name: req.body.name,
+        username: req.body.username,
+        password: hashPass,
+      },
       { new: true }
     );
     res.send({
       status: 200,
       message: "Successfully Updated",
+      updateUser: updateUser,
     });
   } catch (error) {
     res.send({

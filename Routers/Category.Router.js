@@ -2,8 +2,8 @@
  * Copyright (c) 2022
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
-const { Category, validate } = require("../Model/Cagegory");
-const { DoctorModel } = require("../Model/Doctor");
+const { Category, validate } = require("../Model/Cagegory.Model");
+const { DoctorModel } = require("../Model/Doctor.Model");
 const express = require("express");
 const router = express.Router();
 
