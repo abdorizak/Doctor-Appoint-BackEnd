@@ -2,7 +2,7 @@
  * Copyright (c) 2022
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
-const { UserModel, validate } = require("../Model/User");
+const { UserModel, validate } = require("../Model/User.Model");
 const bcrypt = require("bcrypt");
 const express = require("express");
 const Auth = require("../Middleware/Auth");
