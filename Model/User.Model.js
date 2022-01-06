@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
 
 function validate(userSchema) {
   const userValidation = Joi.object({
+    name: Joi.string(),
     username: Joi.string().min(3).required(),
     password: Joi.string().min(5).required(),
   });
@@ -24,9 +25,8 @@ userSchema.methods.generateAuthToken = async () => {
   const token = jwt.sign(
     {
       _id: this._id,
-      username: this.name,
     },
-    "JwtPrivateKey"
+    process.env.SECRET_ACCESS_TOKEN
   );
   return token;
 };
