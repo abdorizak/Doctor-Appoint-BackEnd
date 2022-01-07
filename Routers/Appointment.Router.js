@@ -2,11 +2,12 @@
  * Copyright (c) 2022
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
-const { AppointmentModel, validate } = require("../Model/Appointment.Model");
 const express = require("express");
-const Auth = require("../Middleware/Auth");
 const router = express.Router();
+const { AppointmentModel, validate } = require("../Model/Appointment.Model");
+const Auth = require("../Middleware/Auth");
 router.use(Auth);
+
 router.get("/appointment", async (req, res) => {
   try {
     const AllAppointments = AppointmentModel.find();

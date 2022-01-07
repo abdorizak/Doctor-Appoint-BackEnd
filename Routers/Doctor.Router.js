@@ -2,10 +2,10 @@
  * Copyright (c) 2022
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
-const { DoctorModel, validation } = require("../Model/Doctor.Model");
 const express = require("express");
-const Auth = require("../Middleware/Auth");
 const router = express.Router();
+const { DoctorModel, validation } = require("../Model/Doctor.Model");
+const Auth = require("../Middleware/Auth");
 
 router.use(Auth);
 
@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
     res.send({
       status: 200,
       message: "Successfull",
-      Category: category,
+      category: category,
     });
   } catch (error) {
     res.send({
@@ -34,13 +34,11 @@ router.get("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const header = req.headers["Authorization"];
-    console.log(header);
     const allDoctors = await DoctorModel.find();
     res.send({
       status: 200,
       message: "SuccessFull",
-      Doctors: allDoctors,
+      doctors: allDoctors,
     });
   } catch (error) {
     res.send({
@@ -59,7 +57,7 @@ router.post("/create-Doctor", async (req, res) => {
     res.send({
       status: 200,
       message: "Successfull",
-      Doctors: result,
+      doctors: result,
     });
   } catch (error) {
     res.send({

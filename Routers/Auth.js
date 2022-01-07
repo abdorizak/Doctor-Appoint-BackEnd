@@ -17,8 +17,10 @@ router.post("/login", async (req, res) => {
     if (!validatePassword) return res.send({ message: "Invalid password" });
     // Generate Token and pass though header
     const token = await userInfo.generateAuthToken();
-    res.header("authorization", token).json({ token: token });
-    // console.log(token);
+    res.header("authorization", token).json({
+      success: true,
+      token: token,
+    });
   } catch (error) {
     res.send({
       status: 404,

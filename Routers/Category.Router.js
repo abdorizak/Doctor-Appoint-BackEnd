@@ -2,10 +2,12 @@
  * Copyright (c) 2022
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
-const { Category, validate } = require("../Model/Cagegory.Model");
-const { DoctorModel } = require("../Model/Doctor.Model");
 const express = require("express");
 const router = express.Router();
+const { Category, validate } = require("../Model/Cagegory.Model");
+const { DoctorModel } = require("../Model/Doctor.Model");
+const Auth = require("../Middleware/Auth");
+router.use(Auth);
 
 router.get("/categors/:id", async (req, res) => {
   try {

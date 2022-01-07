@@ -2,15 +2,15 @@
  * Copyright (c) 2022
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
-const { UserModel, validate } = require("../Model/User.Model");
 const bcrypt = require("bcrypt");
 const express = require("express");
-const Auth = require("../Middleware/Auth");
 const router = express.Router();
+const { UserModel, validate } = require("../Model/User.Model");
+const Auth = require("../Middleware/Auth");
 
-// router.use(Auth)
+router.use(Auth);
 
-router.get("/user", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const allusers = await UserModel.find();
     res.send({
