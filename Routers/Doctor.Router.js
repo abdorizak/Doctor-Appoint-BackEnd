@@ -48,6 +48,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/top-doctors", async (req, res) => {
+  try {
+    const topDoctors = await DoctorModel.find().limit(5);
+    res.send({
+      status: 200,
+      message: "Successfully",
+      TopDoctors: topDoctors,
+    });
+  } catch (error) {
+    res.send({
+      status: 400,
+      message: `Error: ${error}`,
+    });
+  }
+});
+
 router.post("/create-Doctor", async (req, res) => {
   const { error } = validation(req.body);
   if (error) return res.status(404).send(error.details[0].message);
