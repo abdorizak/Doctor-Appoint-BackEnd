@@ -25,6 +25,7 @@ userSchema.methods.generateAuthToken = async () => {
   const token = jwt.sign(
     {
       _id: this._id,
+      name: this.name,
     },
     process.env.SECRET_ACCESS_TOKEN
   );
