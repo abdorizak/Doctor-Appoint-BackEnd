@@ -19,6 +19,7 @@ router.post("/login", async (req, res) => {
     const token = await userInfo.generateAuthToken();
     res.header("authorization", token).json({
       success: true,
+      userInfo: userInfo,
       token: token,
     });
   } catch (error) {
