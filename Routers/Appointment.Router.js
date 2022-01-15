@@ -2,15 +2,16 @@
  * Copyright (c) 2022
  * @ author:  Abdorizak Abdalla aka (Xman)
  */
-const express = require("express");
-const router = express.Router();
 const { AppointmentModel, validate } = require("../Model/Appointment.Model");
 const Auth = require("../Middleware/Auth");
+const express = require("express");
+const router = express.Router();
+
 router.use(Auth);
 
-router.get("/appointment", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const AllAppointments = AppointmentModel.find();
+    const AllAppointments = await AppointmentModel.find();
     res.send({
       status: 200,
       message: "SuccessFull",
@@ -28,7 +29,7 @@ router.post("/make-appointment", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(404).send(error.details[0].message);
   try {
-    const makeAppointment = new AppointmentModel();
+    const makeAppointment = new AppointmentModel(req.body);
     const result = await makeAppointment.save();
     res.send({
       status: 200,
@@ -59,3 +60,5 @@ router.delete("/delete-Appointment/:id", async (req, res) => {
     });
   }
 });
+
+module.exports = router;

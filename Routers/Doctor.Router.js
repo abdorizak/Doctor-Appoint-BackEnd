@@ -9,7 +9,7 @@ const Auth = require("../Middleware/Auth");
 
 router.use(Auth);
 
-router.get("/:id", async (req, res) => {
+router.get("/categoryDoctors/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const category = await DoctorModel.find({ categoryId: id });
@@ -23,11 +23,11 @@ router.get("/:id", async (req, res) => {
       status: 200,
       message: "Successfull",
       category: category,
+      count: category.length,
     });
   } catch (error) {
     res.send({
-      status: 400,
-      message: `Error: ${error}`,
+      message: `Error: ${error.message}`,
     });
   }
 });
@@ -50,16 +50,15 @@ router.get("/", async (req, res) => {
 
 router.get("/top-doctors", async (req, res) => {
   try {
-    const topDoctors = await DoctorModel.find().limit(5);
+    const allDoctors = await DoctorModel.find().limit(5);
     res.send({
       status: 200,
-      message: "Successfully",
-      TopDoctors: topDoctors,
+      message: "SuccessFull",
+      doctors: allDoctors,
     });
   } catch (error) {
     res.send({
-      status: 400,
-      message: `Error: ${error}`,
+      message: `Error ${error.message}`,
     });
   }
 });

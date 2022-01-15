@@ -9,7 +9,23 @@ const { DoctorModel } = require("../Model/Doctor.Model");
 const Auth = require("../Middleware/Auth");
 router.use(Auth);
 
-router.get("/categors/:id", async (req, res) => {
+router.get("/", async (req, res) => {
+  try {
+    const allCategories = await Category.find();
+    res.send({
+      status: 200,
+      message: "SuccessFull",
+      categories: allCategories,
+    });
+  } catch (error) {
+    res.send({
+      status: 404,
+      message: `Error: ${error}`,
+    });
+  }
+});
+
+router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const category = await DoctorModel.find({ categoryId: id }).populate({
