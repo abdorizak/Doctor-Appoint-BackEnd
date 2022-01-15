@@ -5,22 +5,28 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const appointmentSchema = new mongoose.Schema({
-  // userID DoctorID Time Cabasho
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  doctorId: { type: mongoose.Schema.Types.ObjectId, ref: "DoctorModel" },
-  appointmentTime: { type: Date, default: Date.now() },
-  description: String,
-});
+const appointmentSchema = new mongoose.Schema(
+  {
+    phoneNumber: String,
+    description: String,
+    appointmentTime: {
+      type: Date,
+      default: Date.now,
+    },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    doctor: { type: mongoose.Schema.Types.ObjectId, ref: "DoctorModel" },
+  },
+  { Timestamp: true }
+);
 
 function validate(appointmentSchema) {
   const appointmentValidation = Joi.object({
-    userId: Joi.string().required(),
-    doctorId: Joi.string().required(),
-    appointmentTime: Joi.string().required(),
+    user: Joi.string().required(),
+    doctor: Joi.string().required(),
+    phoneNumber: Joi.number().required(),
     description: Joi.string().required(),
+    appointmentTime: Joi.string(),
   });
-
   return appointmentValidation.validate(appointmentSchema);
 }
 
