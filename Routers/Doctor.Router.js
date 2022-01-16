@@ -19,11 +19,12 @@ router.get("/categoryDoctors/:id", async (req, res) => {
     //   select: "-_id categoryName categoryImage",
     // });
 
+    console.log(req.headers);
+
     res.send({
       status: 200,
       message: "Successfull",
       category: category,
-      count: category.length,
     });
   } catch (error) {
     res.send({
