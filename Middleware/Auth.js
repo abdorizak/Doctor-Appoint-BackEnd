@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 function Auth(req, res, next) {
+  console.log(req.url);
   const token = req.headers["authorization"];
   if (!token)
     return res
@@ -10,6 +11,7 @@ function Auth(req, res, next) {
     const tokn = token.slice(7);
     jwt.verify(tokn, process.env.SECRET_ACCESS_TOKEN, (err, decoded) => {
       if (err) {
+        console.log(err);
         return res.status(401).send({ message: "InvalidToken" });
       } else {
         req.user = decoded;
