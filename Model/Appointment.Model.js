@@ -9,10 +9,7 @@ const appointmentSchema = new mongoose.Schema(
   {
     phoneNumber: String,
     description: String,
-    appointmentTime: {
-      type: Date,
-      default: Date.now,
-    },
+    appointmentTime: String,
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     doctor: { type: mongoose.Schema.Types.ObjectId, ref: "DoctorModel" },
   },
@@ -25,7 +22,7 @@ function validate(appointmentSchema) {
     doctor: Joi.string().required(),
     phoneNumber: Joi.number().required(),
     description: Joi.string().required(),
-    appointmentTime: Joi.string(),
+    appointmentTime: Joi.string().required(),
   });
   return appointmentValidation.validate(appointmentSchema);
 }
