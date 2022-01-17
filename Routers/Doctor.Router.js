@@ -49,6 +49,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:name", async (req, res) => {
+  try {
+    const doctorInfo = await DoctorModel.find({ name: req.params.name });
+    res.send({
+      status: 200,
+      message: "Successfull",
+      doctorInfo: doctorInfo,
+    });
+  } catch (err) {
+    res.send({
+      message: `Error: ${error}`,
+    });
+  }
+});
+
 router.get("/top-doctors", async (req, res) => {
   try {
     const allDoctors = await DoctorModel.find().limit(5);
