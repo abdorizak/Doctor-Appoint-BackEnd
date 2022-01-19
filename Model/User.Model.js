@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema({
 
 function validate(userSchema) {
   const userValidation = Joi.object({
-    name: Joi.string().required(),
     username: Joi.string().min(3).required(),
     password: Joi.string().min(5).required(),
   });
