@@ -10,6 +10,7 @@ const appointmentSchema = new mongoose.Schema(
     phoneNumber: String,
     description: String,
     appointmentTime: String,
+    status: { type: Boolean, default: false },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     doctor: { type: mongoose.Schema.Types.ObjectId, ref: "DoctorModel" },
   },
