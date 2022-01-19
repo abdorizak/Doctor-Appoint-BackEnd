@@ -25,6 +25,27 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/user_appointment/:id", async (req, res) => {
+  try {
+    const user_appointment = await AppointmentModel.find({
+      user: req.params.id,
+    }).populate({
+      path: "doctor",
+      model: "DoctorModel",
+    });
+    res.send({
+      status: 200,
+      message: "SuccessFull",
+      Appointments: user_appointment,
+    });
+  } catch (error) {
+    res.send({
+      status: 400,
+      message: `Error: ${error}`,
+    });
+  }
+});
+
 router.post("/make-appointment", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(404).send(error.details[0].message);
