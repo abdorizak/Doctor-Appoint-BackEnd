@@ -49,7 +49,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:name", async (req, res) => {
+router.get("/find/:name", async (req, res) => {
   try {
     const doctorInfo = await DoctorModel.find({ name: req.params.name });
     res.send({

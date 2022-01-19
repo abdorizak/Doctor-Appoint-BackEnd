@@ -8,8 +8,6 @@ const router = express.Router();
 const { UserModel, validate } = require("../Model/User.Model");
 const Auth = require("../Middleware/Auth");
 
-router.use(Auth);
-
 router.get("/", async (req, res) => {
   try {
     const allusers = await UserModel.find();
@@ -26,7 +24,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/create-User", async (req, res) => {
+router.post("/create_user", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   try {
@@ -46,7 +44,7 @@ router.post("/create-User", async (req, res) => {
   }
 });
 
-router.put("/update-user/:id", async (req, res) => {
+router.put("/update-user/:id", Auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   try {
