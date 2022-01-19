@@ -18,9 +18,6 @@ router.get("/categoryDoctors/:id", async (req, res) => {
     //   model: "Category",
     //   select: "-_id categoryName categoryImage",
     // });
-
-    console.log(req.headers);
-
     res.send({
       status: 200,
       message: "Successfull",
