@@ -28,14 +28,26 @@ router.post("/create_user", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   try {
-    const user = new UserModel(req.body);
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hashSync(user.password, salt);
-    await user.save();
-    res.send({
-      status: 200,
-      message: `Successfully Registered`,
-    });
+    const username = await UserModel.findOne({ username: req.body.username });
+    if (username) {
+      res.send({
+        status: 406,
+        message: `username is already Exists`,
+      });
+    } else {
+      const user = new UserModel({
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password,
+      });
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hashSync(user.password, salt);
+      await user.save();
+      res.send({
+        status: 200,
+        message: `Successfully Registered`,
+      });
+    }
   } catch (error) {
     res.send({
       status: 400,
