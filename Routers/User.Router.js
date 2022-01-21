@@ -24,6 +24,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/me/:id", async (req, res) => {
+  try {
+    const me = await UserModel.findById(req.params.id);
+    res.send({
+      status: 200,
+      message: "Successfull",
+      userinfo: me,
+    });
+  } catch (error) {
+    res.send({
+      status: 404,
+      message: `Error: ${error}`,
+    });
+  }
+});
+
 router.post("/create_user", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
