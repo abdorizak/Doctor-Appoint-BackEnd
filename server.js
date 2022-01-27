@@ -8,6 +8,7 @@ const User = require("./Routers/User.Router");
 const category = require("./Routers/Category.Router");
 const doctors = require("./Routers/Doctor.Router");
 const appointment = require("./Routers/Appointment.Router");
+const favorites = require("./Routers/Favorites.Route");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -23,6 +24,7 @@ app.use("/api/user", User);
 app.use("/api/category", category);
 app.use("/api/doctors", doctors);
 app.use("/api/appointment", appointment);
+app.use("/api", favorites);
 
 const port = process.env.PORT || 9000;
 
