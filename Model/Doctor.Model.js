@@ -17,6 +17,7 @@ const doctorSchema = new mongoose.Schema(
     certificate: String,
     description: String,
     tell: Number,
+    isFavorited: Boolean,
     categoryId: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
   },
   { Timestamp: true }
@@ -34,6 +35,7 @@ function validation(doctor) {
     certificate: Joi.string().required(),
     tell: Joi.number().min(4).required(),
     description: Joi.string().required(),
+    isFavorited: Joi.boolean().required(),
     categoryId: Joi.string().required(),
   });
 
