@@ -95,7 +95,7 @@ router.post("/create-Doctor", async (req, res) => {
   }
 });
 
-router.get("/update-Doctor/:id", async (req, res) => {
+router.put("/update-Doctor/:id", async (req, res) => {
   const { error } = validation(req.body);
   if (error) return res.status(404).send(error.details[0].message);
   try {

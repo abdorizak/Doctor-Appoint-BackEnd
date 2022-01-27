@@ -49,8 +49,6 @@ router.get("/user_appointment/:id", async (req, res) => {
 router.post("/make-appointment", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(404).send(error.details[0].message);
-
-  console.log(req.body);
   try {
     const makeAppointment = new AppointmentModel(req.body);
     const result = await makeAppointment.save();
