@@ -57,7 +57,7 @@ router.post("/create_user", async (req, res) => {
         password: req.body.password,
       });
       const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hashSync(user.password, salt);
+      user.password = bcrypt.hashSync(user.password, salt);
       await user.save();
       res.send({
         status: 200,
@@ -79,7 +79,7 @@ router.put("/update-user/:id", Auth, async (req, res) => {
     const id = await UserModel.findById(req.params.id);
     if (!id) return res.status(400).send({ message: "ID was not found" });
     const salt = await bcrypt.genSalt(10);
-    const hashPass = await bcrypt.hashSync(req.body.password, salt);
+    const hashPass = bcrypt.hashSync(req.body.password, salt);
     const updateUser = await UserModel.findByIdAndUpdate(
       req.params.id,
       {
