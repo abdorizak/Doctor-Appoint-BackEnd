@@ -102,7 +102,7 @@ router.put("/update-Doctor/:id", async (req, res) => {
     const updateDoc = await DoctorModel.findByIdAndUpdate(
       req.params.id,
       {
-        $set: req.body,
+        $set: req.body,r
       },
       { new: true }
     );
