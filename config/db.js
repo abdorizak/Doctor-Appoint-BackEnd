@@ -8,7 +8,7 @@ const DB = "DoctorAppointment";
 
 async function connectToMongo() {
   try {
-    await mongoose.connect(`mongodb://localhost:27017/${DB}`);
+    await mongoose.connect(`mongodb://127.0.0.1:27017/${DB}`);
     console.log(`Connected to ${DB}....`);
   } catch (error) {
     console.error(`Failed To connect to ${DB}`, error);
