@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const { UserModel, validate } = require("../Model/User.Model");
+const { UserModel, LoginValidator } = require("../Model/User.Model");
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 
 router.post("/login", async (req, res) => {
-  const { error } = validate(req.body);
+  const { error } = LoginValidator(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   try {
     const userInfo = await UserModel.findOne({ username: req.body.username });
