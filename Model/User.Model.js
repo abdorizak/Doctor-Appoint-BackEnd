@@ -12,12 +12,30 @@ const userSchema = new mongoose.Schema({
   password: String,
 });
 
-function validate(userSchema) {
+function RegistrationValidator(user) {
   const userValidation = Joi.object({
+    name: Joi.string().required(),
     username: Joi.string().min(3).required(),
     password: Joi.string().min(5).required(),
   });
-  return userValidation.validate(userSchema);
+  return userValidation.validate(user);
+}
+
+function UpdateValidator(user) {
+  const userUpdateValidation = Joi.object({
+    name: Joi.string().required(),
+    username: Joi.string().min(3).required(),
+    password: Joi.string().min(5).required(),
+  });
+  return userUpdateValidation.validate(user);
+}
+
+function LoginValidator(user) {
+  const userLoginValidator = Joi.object({
+    username: Joi.string().min(3).required(),
+    password: Joi.string().min(5).required(),
+  });
+  return userLoginValidator.validate(user);
 }
 
 userSchema.methods.generateAuthToken = async () => {
@@ -33,5 +51,9 @@ userSchema.methods.generateAuthToken = async () => {
 
 const UserModel = mongoose.model("User", userSchema);
 
-exports.UserModel = UserModel;
-exports.validate = validate;
+module.exports = {
+  UserModel,
+  RegistrationValidator,
+  LoginValidator,
+  UpdateValidator,
+};
