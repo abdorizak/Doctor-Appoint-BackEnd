@@ -5,7 +5,11 @@
 const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
-const { UserModel, validate } = require("../Model/User.Model");
+const {
+  UserModel,
+  RegistrationValidator,
+  UpdateValidator,
+} = require("../Model/User.Model");
 const Auth = require("../Middleware/Auth");
 
 router.get("/", async (req, res) => {
@@ -41,7 +45,7 @@ router.get("/me/:id", async (req, res) => {
 });
 
 router.post("/create_user", async (req, res) => {
-  const { error } = validate(req.body);
+  const { error } = RegistrationValidator(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   try {
     const username = await UserModel.findOne({ username: req.body.username });
@@ -73,7 +77,7 @@ router.post("/create_user", async (req, res) => {
 });
 
 router.put("/update-user/:id", Auth, async (req, res) => {
-  const { error } = validate(req.body);
+  const { error } = UpdateValidator(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   try {
     const id = await UserModel.findById(req.params.id);
