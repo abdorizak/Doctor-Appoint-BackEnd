@@ -6,8 +6,8 @@ this backend is used to manage the users appointments of doctors, so the user ca
 
 before you start the server first install all packages using the this command:
 
-```terminal
-~ npm install
+```sh
+ npm install
 ```
 
 also create `.env` file and add `SECRET_KEY`, asing the secret key to the Random words.
