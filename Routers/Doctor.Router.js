@@ -99,7 +99,7 @@ router.put("/update-Doctor/:id", async (req, res) => {
   const { error } = validation(req.body);
   if (error) return res.status(404).send(error.details[0].message);
   try {
-    const updateDoc = await DoctorModel.findByIdAndUpdate(
+    await DoctorModel.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
